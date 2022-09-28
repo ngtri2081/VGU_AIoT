@@ -1,16 +1,20 @@
-import os
 import cv2
 from keras.models import load_model
 import numpy as np
+import tensorflow as tf
 from PIL import Image, ImageOps
 
+# Static variables
+model_path = "MQTT Instructions\keras_model.h5"
+label_path = "MQTT Instructions\labels.txt"
+
 # Load the model
-model = load_model("keras_model.h5")
+model = load_model(model_path)
 cam = cv2.VideoCapture(0)
 
 def image_capture():
     ret, frame = cam.read()
-    cv2.imread("abc.png", frame)
+    cv2.imwrite("abc.png", frame)
 
 def image_detector():
     # Create the array of the right shape to feed into the keras model
@@ -35,27 +39,14 @@ def image_detector():
     # Load the image into the array
     data[0] = normalized_image_array
 
-    # run the inference
+    # Run the inference
     prediction = model.predict(data)
     print(prediction)
 
-    # Get the 1D array
-    output = prediction[0]
+    # Get the class that the model predicts
+    max_index = int(tf.math.argmax(prediction[0]))
 
-    # Assign default value for max confidence
-    max_index = 0
-    max_confidence = output[0]
-
-    # Find the maximum confidence and its index
-    for i in range(1, len(output)):
-        if max_confidence < output[i]:
-            max_confidence = output[i]
-            max_index = i
-    print(max_index, max_confidence)
-
-    # Map the labels to the maximum index
-    file = open("labels.txt", encoding="utf8")
+    file = open(label_path, encoding="utf8")
     data = file.read().split("\n")
     print("AI Result: ", data[max_index])
-
     return data[max_index]

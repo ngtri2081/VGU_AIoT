@@ -1,10 +1,11 @@
 import sys
+import time
 from simple_ai import *
 from Adafruit_IO import MQTTClient
 
 AIO_FEED_ID = ["Actuator1", "Actuator2"]
 AIO_USERNAME = "VGU_RTOS_Group11"
-AIO_KEY = "aio_wOBS48lAtMKBAfYpu710i3ea0Xux"
+AIO_KEY = "aio_idZr18DbedLdzNNQsjk0zAw45HrO"
 
 def connected(client):
     print("Ket noi thanh cong ...")
@@ -30,8 +31,7 @@ client.connect()
 client.loop_background()
 
 while True:
-    os.time.sleep(5)
+    time.sleep(5)
     image_capture()
     ai_result = image_detector()
-    client.publish("Vision Detector", ai_result)
-    pass
+    client.publish("vision-detector", ai_result)
