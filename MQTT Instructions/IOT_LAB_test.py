@@ -14,10 +14,16 @@ def getPort():
             commPort = (splitPort[0])
     return commPort
 
+def setDevice(state):
+    if state == True:
+        ser.write(relay1_ON)
+    else:
+        ser.write(relay1_OFF)
 
 
 #====================**==================#
 portName = getPort()
+ser = None
 if portName != "None":
     #print Serial name
     ser = serial.Serial(port=portName, baudrate=9600)
@@ -25,10 +31,8 @@ if portName != "None":
 relay1_ON = [0, 6, 0, 0, 0, 255, 200, 91]
 relay1_OFF = [0, 6, 0, 0, 0, 136, 27]
 #test on-off tunnel
-while True:
-    ser.write(relay1_ON)
-    time.sleep(2)
-    ser.write(relay1_OFF)
-    time.sleep(10)
-
-print(ser)
+# while True:
+#     ser.write(relay1_ON)
+#     time.sleep(2)
+#     ser.write(relay1_OFF)
+#     time.sleep(10)
