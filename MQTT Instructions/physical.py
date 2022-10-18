@@ -11,7 +11,7 @@ def getPort():
     for i in range (0, N):
         port = ports[i]
         strPort = str(port)
-        if "COM4" in strPort:
+        if "COM4" in strPort: # CHANGE COM PORT NUMBER HERE IN DEVICE MANAGER
             splitPort = strPort.split(" ")
             commPort = (splitPort[0])
     return commPort
@@ -85,5 +85,5 @@ if __name__ == "__main__":
     while True:
         print("TEST SENSOR")
         print(f"TEMPERATURE: {readTemperature(ser1)}")
-        print(f"MOISTURE: {readMoisture(ser1) / 100:.2f}")
+        print(f"MOISTURE: {readMoisture(ser1) / 100:.2f}%")
         time.sleep(2)
