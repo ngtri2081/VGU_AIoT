@@ -2,4 +2,5 @@ Adafruit_IO==2.7.0
 keras==2.10.0
 numpy==1.19.4
 Pillow==9.2.0
+pyserial>=3.1.1
 ~pencv_python_headless==4.5.1.48
