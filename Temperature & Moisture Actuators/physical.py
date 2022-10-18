@@ -1,7 +1,7 @@
 import time
 import serial.tools.list_ports
 
-print("Sensors and Actiators")
+print("Sensors and Actuators")
 
 ### PRINT COMPORT NAME (STEP 3)
 def getPort():
@@ -83,7 +83,7 @@ if __name__ == "__main__":
                             baudrate=9600)
 
     while True:
-        print("TEST SENSOR")
-        print(f"TEMPERATURE: {readTemperature(ser1)}")
+        print("\nTEST SENSOR")
+        print(f"TEMPERATURE: {readTemperature(ser1)} degree")
         print(f"MOISTURE: {readMoisture(ser1) / 100:.2f}%")
         time.sleep(2)

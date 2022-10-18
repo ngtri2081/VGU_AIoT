@@ -1,5 +1,4 @@
 import sys
-import time
 from IOT_LAB_test import *
 from Adafruit_IO import MQTTClient
 
