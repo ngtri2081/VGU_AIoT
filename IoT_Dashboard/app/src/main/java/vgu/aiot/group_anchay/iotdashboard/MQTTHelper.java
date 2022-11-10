@@ -22,7 +22,7 @@ public class MQTTHelper {
                                          "VGU_RTOS_Group11/feeds/actuator1",
                                          "VGU_RTOS_Group11/feeds/actuator2"};
 
-    final String clientId = "12345678";
+    final String clientId = "12315";
     final String username = "VGU_RTOS_Group11";
     final String password = "aio_idZr18DbedLdzNNQsjk0zAw45HrO";
 

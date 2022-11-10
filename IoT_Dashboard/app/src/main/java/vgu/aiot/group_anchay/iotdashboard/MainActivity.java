@@ -13,7 +13,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MainActivity extends AppCompatActivity {
     MQTTHelper mqttHelper;
-    TextView txtTemperature, txtHumidity, txtVision;
+    TextView txtTemperature, txtHumidity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +24,8 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception exception){
             exception.printStackTrace();
         }
-        txtTemperature = findViewById(R.id.textView1);
-        txtHumidity = findViewById(R.id.textView20);
-        txtVision = findViewById(R.id.textView3);
+        txtTemperature = findViewById(R.id.temperatureText);
+        txtHumidity = findViewById(R.id.humidityText);
     }
 
     public void startMQTT(){
@@ -45,9 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.d("TEST", topic + " *** " + message.toString());
-                if (topic.contains("vision-detector")){
-                    txtVision.setText(message.toString());
-                } else if (topic.contains("actuator1")){
+                if (topic.contains("actuator1")){
                     txtHumidity.setText(message.toString() + "%");
                 } else if (topic.contains("actuator2")){
                     txtTemperature.setText(message.toString());
