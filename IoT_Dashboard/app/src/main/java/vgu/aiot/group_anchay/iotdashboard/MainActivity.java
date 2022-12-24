@@ -2,8 +2,12 @@ package vgu.aiot.group_anchay.iotdashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -14,6 +18,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class MainActivity extends AppCompatActivity {
     MQTTHelper mqttHelper;
     TextView txtTemperature, txtHumidity;
+    ImageButton myImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +31,19 @@ public class MainActivity extends AppCompatActivity {
         }
         txtTemperature = findViewById(R.id.temperatureText);
         txtHumidity = findViewById(R.id.humidityText);
-    }
+
+
+        setContentView(R.layout.activity_main);
+        myImageButton = findViewById(R.id.weatherImage);
+        myImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intentLoadNewActivity = new Intent(MainActivity.this, NewActivity.class);
+                    startActivity(intentLoadNewActivity);
+               }
+            });
+        }
+
 
     public void startMQTT(){
         mqttHelper = new MQTTHelper(this);
@@ -57,4 +74,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
