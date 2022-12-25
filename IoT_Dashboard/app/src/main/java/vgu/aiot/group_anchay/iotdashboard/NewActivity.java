@@ -20,7 +20,6 @@ ListView lsvWeather;
 
         ArrayList<Weather> arr = new ArrayList<>();
 
-        Random r= new Random();
         arr.add(new Weather(24,"So hot" ));
         arr.add(new Weather(24,"So hot" ));
         arr.add(new Weather(24,"So hot" ));

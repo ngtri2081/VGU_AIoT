@@ -4,4 +4,9 @@
     <string name="stop_recording">Stop recording</string>
     <string name="specs">Specs</string>
     <string name="output">Output</string>
+    <string name="smart_agriculture">SMART AGRICULTURE</string>
+    <string name="water_pump">Water Pump</string>
+    <string name="weather">Weather</string>
+    <string name="description">description</string>
+    <string name="day">day</string>
 </resources>

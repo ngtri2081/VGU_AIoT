@@ -14,19 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherAdapter extends ArrayAdapter<Weather> {
-    private Context ct;
-    private ArrayList<Weather> arr;
+    private final Context ct;
+    private final ArrayList<Weather> arr;
     public WeatherAdapter(@NonNull Context context, int resource, @NonNull List<Weather> objects) {
         super(context, resource, objects);
-        this.ct= context;
-        this.arr= new ArrayList<>(objects);
+        this.ct = context;
+        this.arr = new ArrayList<>(objects);
 
     }
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent){
         if(convertView == null){
-            LayoutInflater i = (LayoutInflater)ct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater i = (LayoutInflater) ct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = i.inflate(R.layout.weather_layout,null);
         }
 
@@ -38,7 +38,6 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
 
             txtDay.setText(w.date);
             txtDescription.setText(w.description);
-
         }
         return convertView;
     }

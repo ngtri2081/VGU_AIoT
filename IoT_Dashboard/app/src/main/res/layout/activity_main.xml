@@ -51,7 +51,7 @@
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GREEN DASHBOARD"
+                        android:text="@string/smart_agriculture"
                         android:textColor="@color/white"
                         android:textSize="26dp"
                         android:textStyle="bold"
@@ -179,23 +179,24 @@
                                     android:background="@drawable/cirle_backround">
 
                                     <ImageView
-                                        android:id="@+id/unavailableImage"
+                                        android:id="@+id/waterPumpImage"
                                         android:layout_width="100dp"
                                         android:layout_height="100dp"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:srcCompat="@drawable/water_pumps" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                                 <TextView
-                                    android:id="@+id/unavailableText"
+                                    android:id="@+id/waterPump"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="1dp"
-                                    android:text="Unavailable"
-                                    android:textSize="20dp"
+                                    android:text="@string/water_pump"
                                     android:textAlignment="center"
+                                    android:textSize="20sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
 
@@ -231,7 +232,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="1dp"
-                                    android:text="Weather"
+                                    android:text="@string/weather"
+                                    android:textSize="20sp"
                                     android:textAlignment="center"
                                     android:textStyle="bold" />
                             </LinearLayout>
@@ -242,25 +244,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
-                android:id="@+id/button1"
-                android:layout_width="300dp"
-                android:layout_height="49dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:background="@drawable/dashboard_button"
-                android:text="See current data"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/dashboard_button"
-                android:text="See History"
-                android:textColor="@color/white" />
-
-            <Button
                 android:id="@+id/button3"
                 android:layout_width="300dp"
                 android:layout_height="49dp"
@@ -268,8 +251,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/dashboard_button"
                 android:text="Audio Classification"
-                android:textColor="@color/white"
-                android:onClick="onGotoAudioClassification"/>
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

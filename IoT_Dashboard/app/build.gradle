@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'vgu.aiot.group_anchay.iotdashboard'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "vgu.aiot.group_anchay.iotdashboard"
         minSdk 23
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -30,20 +30,17 @@ android {
     // Specify that the tflite file should not be compressed when building the APK package.
     aaptOptions {
         noCompress "tflite"
-        noCompress "lite"
     }
 }
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
     implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
-    implementation 'org.tensorflow:tensorflow-lite:2.4.0'
-    implementation 'org.tensorflow:tensorflow-lite-support:2.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
 
     testImplementation 'junit:junit:4.13.2'
