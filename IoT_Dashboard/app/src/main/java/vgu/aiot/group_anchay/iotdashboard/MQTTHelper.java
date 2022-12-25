@@ -19,8 +19,9 @@ public class MQTTHelper {
     public MqttAndroidClient mqttAndroidClient;
 
     public final String[] arrayTopics = {"VGU_RTOS_Group11/feeds/vision-detector",
-                                         "VGU_RTOS_Group11/feeds/actuator1",
-                                         "VGU_RTOS_Group11/feeds/actuator2"};
+                                         "VGU_RTOS_Group11/feeds/humidity",
+                                         "VGU_RTOS_Group11/feeds/temperature",
+                                         "VGU_RTOS_Group11/feeds/voice-command"};
 
     final String clientId = "12315";
     final String username = "VGU_RTOS_Group11";
