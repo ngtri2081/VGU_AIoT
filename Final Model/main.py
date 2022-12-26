@@ -1,12 +1,16 @@
+import cv2
 import sys
 import time
-from ai import *
+import numpy as np
+from yolo import YOLO
+from imutils.video import VideoStream
 from Adafruit_IO import MQTTClient
 import serial.tools.list_ports
 
-AIO_FEED_ID = ["temperature", "humidity", "vision-detector", "voice-command"]
+AIO_FEED_ID = ["temperature", "humidity", "intrusion-detector", "voice-command"]
 AIO_USERNAME = "VGU_RTOS_Group11"
 AIO_KEY = "aio_idZr18DbedLdzNNQsjk0zAw45HrO"
+
 
 def connected(client):
     print("Ket noi thanh cong ...")
@@ -79,6 +83,17 @@ def readMoisture(ser, soil_moisture):
     time.sleep(1)
     return serial_read_data(ser)
 
+def handle_left_click(event, x, y, flags, points):
+    if event == cv2.EVENT_LBUTTONDOWN:
+        points.append([x, y])
+
+
+def draw_polygon(frame, points):
+    for point in points:
+        frame = cv2.circle(frame, (point[0], point[1]), 5, (0, 0, 255), -1)
+    frame = cv2.polylines(frame, [np.int32(points)], False, (255, 0, 0), thickness=2)
+    return frame
+
 
 if __name__ == "__main__":
     client = MQTTClient(AIO_USERNAME , AIO_KEY)
@@ -92,6 +107,8 @@ if __name__ == "__main__":
     client.loop_background()
 
     ### SEND COMMAND TO ACTUATORS
+    points = []
+    animals_and_persons = ["person", "dog", "cat", "bird", "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe"]
     data_air2_temp = [3, 3, 0, 0, 0, 1, 133, 232]
     data_air2_humi = [3, 3, 0, 1, 0, 1, 212, 40]
     data_pm_25 = [4, 3, 0, 12, 0, 1, 68, 92]
@@ -104,16 +121,35 @@ if __name__ == "__main__":
     #    ser1 = serial.Serial(port=portName,
     #                        baudrate=9600)
 
+    video = VideoStream(src=0).start()
+    model = YOLO(detect_class=animals_and_persons, client=client)
+    detect = False
+    
     while True:
-        image_capture()
-        ai_result = image_detector()
-        time.sleep(1)
+        frame = video.read()
+        frame = cv2.flip(frame, 1)
+        # Draw polygon
+        frame = draw_polygon(frame, points)
+        # Detect
+        if detect:
+            frame = model.detect(frame=frame, points=points)
+        key = cv2.waitKey(1)
+        # q to quit
+        if key == ord('q'):
+            break
+        # d to detect
+        elif key == ord('d'):
+            points.append(points[0])
+            detect = True
+        # Show frame
+        cv2.imshow("Intrusion Warning", frame)
+        cv2.setMouseCallback('Intrusion Warning', handle_left_click, points)
         #temperature_result = readTemperature(ser=ser1, soil_temperature=data_air2_temp)
         #moisture_result = readMoisture(ser=ser1, soil_moisture=data_air2_humi)
-        print(f"AI RESULT: {ai_result}")
         #print(f"TEMPERATURE: {temperature_result} degree")
         #print(f"MOISTURE: {moisture_result}%")
         #client.publish("temperature", temperature_result)
         #client.publish("moisture", moisture_result)
-        client.publish("vision-detector", ai_result)
-        time.sleep(5)
+        #time.sleep(5)
+    video.stop()
+    cv2.destroyAllWindows()
