@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BasicUiDashboard</string>
+    <string name="app_name">Smart Agriculture</string>
     <string name="start_recording">Start recording</string>
     <string name="stop_recording">Stop recording</string>
     <string name="specs">Specs</string>
@@ -9,4 +9,7 @@
     <string name="weather">Weather</string>
     <string name="description">description</string>
     <string name="day">day</string>
+    <string name="water_pump_status">Water Pump Status</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
 </resources>

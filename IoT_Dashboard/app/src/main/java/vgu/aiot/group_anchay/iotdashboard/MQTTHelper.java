@@ -21,9 +21,9 @@ public class MQTTHelper {
     public final String[] arrayTopics = {"VGU_RTOS_Group11/feeds/vision-detector",
                                          "VGU_RTOS_Group11/feeds/humidity",
                                          "VGU_RTOS_Group11/feeds/temperature",
-                                         "VGU_RTOS_Group11/feeds/voice-command"};
+                                         "VGU_RTOS_Group11/feeds/water-pump"};
 
-    final String clientId = "12315";
+    final String clientId = "23155";
     final String username = "VGU_RTOS_Group11";
     final String password = "aio_idZr18DbedLdzNNQsjk0zAw45HrO";
 

@@ -1,6 +1,10 @@
 package vgu.aiot.group_anchay.iotdashboard;
 
-public class Weather {
+import androidx.annotation.NonNull;
+
+import java.io.Serializable;
+
+public class Weather implements Serializable {
     public int date;
     public String description;
 
@@ -9,4 +13,9 @@ public class Weather {
         this.description = description;
     }
 
+    @NonNull
+    @Override
+    public String toString(){
+        return "Day: " + date + ", description: " + description;
+    }
 }

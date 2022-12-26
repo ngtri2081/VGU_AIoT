@@ -189,15 +189,17 @@
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                                <TextView
-                                    android:id="@+id/waterPump"
-                                    android:layout_width="match_parent"
+                                <ToggleButton
+                                    android:id="@+id/waterPumpStatus"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="1dp"
-                                    android:text="@string/water_pump"
-                                    android:textAlignment="center"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_margin="10dp"
+                                    android:background="@drawable/dashboard_button"
+                                    android:text="@string/water_pump_status"
+                                    android:textColor="@color/white"
+                                    android:textOff="@string/off"
+                                    android:textOn="@string/on" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -243,15 +245,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="300dp"
-                android:layout_height="49dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:background="@drawable/dashboard_button"
-                android:text="Audio Classification"
-                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
