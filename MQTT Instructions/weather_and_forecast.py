@@ -48,7 +48,7 @@ def retrieve_data_visualcrossing():
         elif re.search("conditions", col):
             arr.append(col[pos:])
 
-    print(arr)
+    # print(arr)
     return arr
     # ['2022-12-26', '87.7', '67.9', '71.0', '6.7', '212.8', '"Partially cloudy"',...]
 #       date, temp_max, temp_min, humidity, wind_speed, solar_radiation, condition
@@ -83,5 +83,4 @@ def get_condition(day):
     arr = retrieve_data_visualcrossing()
     res = arr[6 + 7 * day]
     return res
-print(get_tempmax(1))
 
