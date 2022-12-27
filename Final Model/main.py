@@ -108,7 +108,7 @@ if __name__ == "__main__":
 
     ### SEND COMMAND TO ACTUATORS
     points = []
-    animals_and_persons = ["person", "cell phone", "cat", "bird", "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe"]
+    animals_and_persons = ["person", "dog", "cat", "bird", "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe"]
     data_air2_temp = [3, 3, 0, 0, 0, 1, 133, 232]
     data_air2_humi = [3, 3, 0, 1, 0, 1, 212, 40]
     data_pm_25 = [4, 3, 0, 12, 0, 1, 68, 92]
@@ -124,6 +124,8 @@ if __name__ == "__main__":
     video = VideoStream(src=0).start()
     model = YOLO(detect_class=animals_and_persons, client=client)
     detect = False
+    # Time threshold for sending data to Adafruit IO
+    time_threshold = 5
     begin_time = datetime.datetime.utcnow()
 
     while True:
@@ -145,7 +147,7 @@ if __name__ == "__main__":
         # Show frame
         cv2.imshow("Intrusion Warning", frame)
         cv2.setMouseCallback('Intrusion Warning', handle_left_click, points)
-        if (datetime.datetime.utcnow() - begin_time).total_seconds() >= 5:
+        if (datetime.datetime.utcnow() - begin_time).total_seconds() >= time_threshold:
             temperature_result = readTemperature(ser=ser1, soil_temperature=data_air2_temp)
             moisture_result = readMoisture(ser=ser1, soil_moisture=data_air2_humi)
             print(f"TEMPERATURE: {temperature_result} degree")
