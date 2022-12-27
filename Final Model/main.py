@@ -1,32 +1,33 @@
 import cv2
 import sys
 import time
+import datetime
 import numpy as np
 from yolo import YOLO
 from imutils.video import VideoStream
 from Adafruit_IO import MQTTClient
 import serial.tools.list_ports
 
-AIO_FEED_ID = ["temperature", "humidity", "intrusion-detector", "voice-command"]
+AIO_FEED_ID = ["temperature", "humidity", "intrusion-detector", "water-pump"]
 AIO_USERNAME = "VGU_RTOS_Group11"
 AIO_KEY = "aio_idZr18DbedLdzNNQsjk0zAw45HrO"
 
 
 def connected(client):
-    print("Ket noi thanh cong ...")
+    print("----Connect successfully----")
     for topic in AIO_FEED_ID:
-      client.subscribe(topic)
+        print(f"----Subscribing to {topic}...")
+        client.subscribe(topic)
 
 def subscribe(client , userdata , mid , granted_qos):
     print("----Subscribed ...")
 
 def disconnected(client):
-    print("----Disconnecting ...")
+    print(f"----Disconnecting from {client}...")
     sys.exit (1)
 
 def message(client , feed_id , payload):
-    if feed_id == "voice-command":
-        print(f"----Receive voice command: {payload}")
+    print(f"----Receive from {feed_id}: {payload}")
 
 def getPort():
     ports = serial.tools.list_ports.comports()
@@ -124,7 +125,8 @@ if __name__ == "__main__":
     video = VideoStream(src=0).start()
     model = YOLO(detect_class=animals_and_persons, client=client)
     detect = False
-    
+    begin_time = datetime.datetime.utcnow()
+
     while True:
         frame = video.read()
         frame = cv2.flip(frame, 1)
@@ -144,12 +146,14 @@ if __name__ == "__main__":
         # Show frame
         cv2.imshow("Intrusion Warning", frame)
         cv2.setMouseCallback('Intrusion Warning', handle_left_click, points)
-        #temperature_result = readTemperature(ser=ser1, soil_temperature=data_air2_temp)
-        #moisture_result = readMoisture(ser=ser1, soil_moisture=data_air2_humi)
-        #print(f"TEMPERATURE: {temperature_result} degree")
-        #print(f"MOISTURE: {moisture_result}%")
-        #client.publish("temperature", temperature_result)
-        #client.publish("moisture", moisture_result)
-        #time.sleep(5)
+        if (datetime.datetime.utcnow() - begin_time).total_seconds() >= 5:
+            #temperature_result = readTemperature(ser=ser1, soil_temperature=data_air2_temp)
+            #moisture_result = readMoisture(ser=ser1, soil_moisture=data_air2_humi)
+            #print(f"TEMPERATURE: {temperature_result} degree")
+            #print(f"MOISTURE: {moisture_result}%")
+            #client.publish("temperature", temperature_result)
+            #client.publish("moisture", moisture_result)
+            print(f"----Publishing at {datetime.datetime.utcnow()}...")
+            begin_time = datetime.datetime.utcnow()
     video.stop()
     cv2.destroyAllWindows()

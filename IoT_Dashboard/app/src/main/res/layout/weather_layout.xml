@@ -24,7 +24,7 @@
                 android:padding="10dp"
                 android:text="@string/day">
 
-            </TextView>>
+            </TextView>
 
             <LinearLayout
                 android:layout_width="match_parent"

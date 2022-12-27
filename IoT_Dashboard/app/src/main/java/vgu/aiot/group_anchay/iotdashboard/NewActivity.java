@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class NewActivity extends AppCompatActivity {
             System.out.println(weather);
         }
         System.out.println("----SUCCESSFULLY RETRIEVE WEATHER FORECAST----");
-        WeatherAdapter adapter = new WeatherAdapter((Context) this,0, arr);
+        WeatherAdapter adapter = new WeatherAdapter(this, arr);
         lsvWeather.setAdapter(adapter);
     }
 }

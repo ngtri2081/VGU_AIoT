@@ -19,8 +19,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity{
     static Calendar calendar = Calendar.getInstance();
     static Map<String, String> dictionary = new HashMap<>();
     static String url = "https://io.adafruit.com/api/v2/VGU_RTOS_Group11/feeds/";
-    static String weatherUrl = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Thu%20Dau%20Mot/next7days?unitGroup=metric&elements=description&include=days&key=HJTDNTULRSEBHCC3BF2U54LV9&contentType=json";
+    static String weatherUrl = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Thu%20Dau%20Mot/next7days?unitGroup=metric&elements=datetime%2Ctempmax%2Ctempmin%2Cdescription%2Cicon&include=days&key=HJTDNTULRSEBHCC3BF2U54LV9&contentType=json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,14 +115,10 @@ public class MainActivity extends AppCompatActivity{
 
     private static ArrayList<Weather> requestWeatherForecast() {
         OkHttpClient client = new OkHttpClient();
-
+        ArrayList<Weather> arr = new ArrayList<>();
         Request request = new Request.Builder()
                 .url(weatherUrl)
                 .build();
-
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-
-        ArrayList<Weather> arr = new ArrayList<>();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -136,17 +135,38 @@ public class MainActivity extends AppCompatActivity{
                     try {
                         JSONObject dataJSON = new JSONObject(myResponse);
                         JSONArray dataJSONArray = dataJSON.getJSONArray("days");
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
                         for (int i = 0; i < dataJSONArray.length(); i++) {
+                            // GET THE DATA IN FORMS OF JSON OBJECT
                             JSONObject day = dataJSONArray.getJSONObject(i);
-                            // Do something with the element
-                            Object description = day.get("description");
-                            int currentDate = dayOfWeek + i;
-                            System.out.println("----DAY " + currentDate + ": " + description);
-                            arr.add(new Weather(currentDate, description.toString()));
+                            // THE DATE
+                            String dateString = (String) day.get("datetime");
+                            Date date = dateFormat.parse(dateString);
+                            calendar.setTime(date);
+                            // THE DESCRIPTION
+                            String description = (String) day.get("description");
+                            // HIGH TEMP
+                            double highTemp = (double) day.get("tempmax");
+                            // LOW TEMP
+                            double lowTemp = (double) day.get("tempmin");
+                            // WEATHER ICON
+                            String weatherIcon = (String) day.get("icon");
+                            // INIT WEATHER OBJECT
+                            Weather weather = new Weather();
+                            // SET THE DATA TO THE WEATHER OBJECT
+                            weather.setDate(calendar.get(Calendar.DAY_OF_WEEK));
+                            weather.setDescription(description);
+                            weather.setHighTemp(highTemp);
+                            weather.setLowTemp(lowTemp);
+                            weather.setWeatherIcon(weatherIcon);
+                            System.out.println(weather);
+                            arr.add(weather);
                         }
                         System.out.println("----UPDATE WEATHER SUCCESSFULLY----");
                     } catch (JSONException e) {
                         System.out.println("----ERROR WHEN TRANSFORMING DATA STRING TO JSON----");
+                        e.printStackTrace();
+                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
