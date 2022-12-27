@@ -12,4 +12,9 @@
     <string name="water_pump_status">Water Pump Status</string>
     <string name="off">Off</string>
     <string name="on">On</string>
+    <string name="weather_toggle">Weather</string>
+    <string name="intrusionDetector">Status</string>
+    <string name="audioToText">Initiate</string>
+    <string name="warning">WARNING</string>
+    <string name="status">Status</string>
 </resources>

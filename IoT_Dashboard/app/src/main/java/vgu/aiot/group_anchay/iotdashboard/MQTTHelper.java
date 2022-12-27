@@ -18,7 +18,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class MQTTHelper {
     public MqttAndroidClient mqttAndroidClient;
 
-    public final String[] arrayTopics = {"VGU_RTOS_Group11/feeds/vision-detector",
+    public final String[] arrayTopics = {"VGU_RTOS_Group11/feeds/intrusion-detector",
                                          "VGU_RTOS_Group11/feeds/humidity",
                                          "VGU_RTOS_Group11/feeds/temperature",
                                          "VGU_RTOS_Group11/feeds/water-pump"};

@@ -99,6 +99,6 @@ public class Weather implements Serializable {
     @NonNull
     @Override
     public String toString(){
-        return "Day: " + getDayOfWeek() + ", description: " + description + ", high temp: " + highTemp + ", low temp: " + lowTemp + ", icon: " + getWeatherIcon();
+        return "Day: " + getDayOfWeek() + ", day in week: " + date + ", description: " + description + ", high temp: " + highTemp + ", low temp: " + lowTemp + ", icon: " + getWeatherIcon();
     }
 }

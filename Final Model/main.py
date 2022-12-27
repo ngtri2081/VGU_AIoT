@@ -109,7 +109,7 @@ if __name__ == "__main__":
 
     ### SEND COMMAND TO ACTUATORS
     points = []
-    animals_and_persons = ["person", "dog", "cat", "bird", "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe"]
+    animals_and_persons = ["person", "cell phone", "cat", "bird", "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe"]
     data_air2_temp = [3, 3, 0, 0, 0, 1, 133, 232]
     data_air2_humi = [3, 3, 0, 1, 0, 1, 212, 40]
     data_pm_25 = [4, 3, 0, 12, 0, 1, 68, 92]

@@ -30,19 +30,24 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.custom_weather_item, parent, false);
 
-        TextView dayView = (TextView) rowView.findViewById(R.id.day_of_week);
-        dayView.setText(weather.getDayOfWeek());
+        TextView dayView = rowView.findViewById(R.id.day_of_week);
+        if (position == 0) {
+            dayView.setText("Today");
+        } else {
+            dayView.setText(weather.getDayOfWeek());
+        }
 
-        TextView highTempView = (TextView) rowView.findViewById(R.id.high_temp);
-        highTempView.setText(String.valueOf(weather.getHighTemp()));
+        TextView highTempView = rowView.findViewById(R.id.high_temp);
+        highTempView.setText(weather.getHighTemp() + "°C");
 
-        TextView lowTempView = (TextView) rowView.findViewById(R.id.low_temp);
-        lowTempView.setText(String.valueOf(weather.getLowTemp()));
+        TextView lowTempView = rowView.findViewById(R.id.low_temp);
+        lowTempView.setText(weather.getLowTemp() + "°C");
 
-        TextView descriptionView = (TextView) rowView.findViewById(R.id.descriptionText);
+        TextView descriptionView = rowView.findViewById(R.id.descriptionText);
         descriptionView.setText(weather.getDescription());
 
-        ImageView weatherIconView = (ImageView) rowView.findViewById(R.id.weatherIcon);
+        ImageView weatherIconView = rowView.findViewById(R.id.weatherIcon);
+
         switch (weather.getWeatherIcon()) {
             case "partly-cloudy-day":
                 weatherIconView.setImageResource(R.drawable.partlycloudy);

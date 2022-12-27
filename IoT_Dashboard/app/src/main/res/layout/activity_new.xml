@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".NewActivity">
     <LinearLayout
+        android:id="@+id/accelerate"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="match_parent"
-        android:background="@drawable/weather_background">
+        android:background="@drawable/night">
 
     </LinearLayout>
     <ListView

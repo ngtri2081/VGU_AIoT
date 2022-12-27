@@ -13,7 +13,8 @@
             android:id="@+id/day_of_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="25sp"
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -24,17 +25,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Temperature: "
-                android:textSize="16sp" />
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/high_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text=" / "
                 android:textSize="16sp" />
 
@@ -42,6 +47,7 @@
                 android:id="@+id/low_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="italic" />
         </LinearLayout>
@@ -49,6 +55,7 @@
         <TextView
             android:id="@+id/descriptionText"
             android:layout_width="wrap_content"
+            android:textColor="@color/white"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
