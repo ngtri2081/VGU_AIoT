@@ -12,7 +12,6 @@ AIO_FEED_ID = ["temperature", "humidity", "intrusion-detector", "water-pump"]
 AIO_USERNAME = "VGU_RTOS_Group11"
 AIO_KEY = "aio_idZr18DbedLdzNNQsjk0zAw45HrO"
 
-
 def connected(client):
     print("----Connect successfully----")
     for topic in AIO_FEED_ID:
@@ -116,11 +115,11 @@ if __name__ == "__main__":
     data_pm_10 = [4, 3, 0, 13, 0, 1, 21, 156]
     data_co2 = [2, 3, 0, 4, 0, 1, 197, 248]
     ### TESTING USING REAL SENSORS
-    #portName = getPort()
-    #print(f"Portname: {portName}")
-    #if portName != "None":
-    #    ser1 = serial.Serial(port=portName,
-    #                        baudrate=9600)
+    portName = getPort()
+    print(f"Portname: {portName}")
+    if portName != "None":
+        ser1 = serial.Serial(port=portName,
+                            baudrate=9600)
 
     video = VideoStream(src=0).start()
     model = YOLO(detect_class=animals_and_persons, client=client)
@@ -147,12 +146,12 @@ if __name__ == "__main__":
         cv2.imshow("Intrusion Warning", frame)
         cv2.setMouseCallback('Intrusion Warning', handle_left_click, points)
         if (datetime.datetime.utcnow() - begin_time).total_seconds() >= 5:
-            #temperature_result = readTemperature(ser=ser1, soil_temperature=data_air2_temp)
-            #moisture_result = readMoisture(ser=ser1, soil_moisture=data_air2_humi)
-            #print(f"TEMPERATURE: {temperature_result} degree")
-            #print(f"MOISTURE: {moisture_result}%")
-            #client.publish("temperature", temperature_result)
-            #client.publish("moisture", moisture_result)
+            temperature_result = readTemperature(ser=ser1, soil_temperature=data_air2_temp)
+            moisture_result = readMoisture(ser=ser1, soil_moisture=data_air2_humi)
+            print(f"TEMPERATURE: {temperature_result} degree")
+            print(f"MOISTURE: {moisture_result}%")
+            client.publish("temperature", temperature_result)
+            client.publish("moisture", moisture_result)
             print(f"----Publishing at {datetime.datetime.utcnow()}...")
             begin_time = datetime.datetime.utcnow()
     video.stop()
