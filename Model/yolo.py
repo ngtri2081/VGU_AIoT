@@ -8,9 +8,9 @@ import numpy as np
 class YOLO():
     def __init__(self, detect_class, client, frame_width=720, frame_height=720):
         # Parameters
-        self.classnames_file = "Model/classnames.txt"
-        self.weights_file = "Model/yolov7-tiny.weights"
-        self.config_file = "Model/yolov7-tiny.cfg"
+        self.classnames_file = "YOLOv7/classnames.txt"
+        self.weights_file = "YOLOv7/yolov7-tiny.weights"
+        self.config_file = "YOLOv7/yolov7-tiny.cfg"
         self.model = cv2.dnn.readNet(self.weights_file, self.config_file)
         self.detect_class = detect_class
         self.frame_width = frame_width
