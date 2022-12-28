@@ -1,7 +1,6 @@
 Adafruit_IO==2.7.0
-keras==2.10.0
+imutils==0.5.4
 numpy==1.23.3
-Pillow==9.2.0
-pyserial>=3.1.1
-opencv-python
-imutils
+pyserial==3.5
+shapely==2.0.0
+~pencv_python_headless==4.5.1.48
