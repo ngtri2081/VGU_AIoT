@@ -147,14 +147,17 @@ if __name__ == "__main__":
         # Show frame
         cv2.imshow("Intrusion Warning", frame)
         cv2.setMouseCallback('Intrusion Warning', handle_left_click, points)
-        if (datetime.datetime.utcnow() - begin_time).total_seconds() >= time_threshold:
-            temperature_result = readTemperature(ser=ser1, soil_temperature=data_air2_temp)
-            moisture_result = readMoisture(ser=ser1, soil_moisture=data_air2_humi)
-            print(f"TEMPERATURE: {temperature_result} degree")
-            print(f"MOISTURE: {moisture_result}%")
-            client.publish("temperature", temperature_result)
-            client.publish("moisture", moisture_result)
-            print(f"----Publishing at {datetime.datetime.utcnow()}...")
+        if ((datetime.datetime.utcnow() - begin_time).total_seconds() >= time_threshold):
+            if (portName != "None"):
+                temperature_result = readTemperature(ser=ser1, soil_temperature=data_air2_temp)
+                moisture_result = readMoisture(ser=ser1, soil_moisture=data_air2_humi)
+                print(f"TEMPERATURE: {temperature_result} degree")
+                print(f"MOISTURE: {moisture_result}%")
+                client.publish("temperature", temperature_result)
+                client.publish("moisture", moisture_result)
+                print(f"----Publishing at {datetime.datetime.utcnow()}...")
+            else:
+                print(f"----NO PORT FOUND----")
             begin_time = datetime.datetime.utcnow()
     video.stop()
     cv2.destroyAllWindows()
