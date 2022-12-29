@@ -1,6 +1,7 @@
 import cv2
 import sys
 import time
+import yaml
 import datetime
 import numpy as np
 from yolo import YOLO
@@ -10,7 +11,7 @@ import serial.tools.list_ports
 
 AIO_FEED_ID = ["temperature", "humidity", "intrusion-detector", "water-pump"]
 AIO_USERNAME = "VGU_RTOS_Group11"
-AIO_KEY = "aio_idZr18DbedLdzNNQsjk0zAw45HrO"
+AIO_KEY = None 
 
 def connected(client):
     print("----Connect successfully----")
@@ -96,6 +97,15 @@ def draw_polygon(frame, points):
 
 
 if __name__ == "__main__":
+    # LOAD config.yml FILE
+    # 
+    with open('config.yml') as f:
+        config = yaml.safe_load(f)
+    # EXTRACT ADAFRUIT IO API KEY
+    AIO_KEY = config['aio_key']
+    # ASSURE THAT API KEY HAS BEEN PASSED IN
+    assert AIO_KEY is not None, "Find config.yml file at the line `aio_key: YOUR_API_KEY_HERE`"
+    # INIT MQTT CLIENT
     client = MQTTClient(AIO_USERNAME , AIO_KEY)
 
     client.on_connect = connected

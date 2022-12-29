@@ -57,7 +57,7 @@ class YOLO():
         return isInside
 
     def alert(self, img):
-        cv2.putText(img, "ALARM!!!!", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+        cv2.putText(img, "ALARM!!!", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
         if (self.last_alert is None) or (
                 (datetime.datetime.utcnow() - self.last_alert).total_seconds() > self.time_threshold):
             self.last_alert = datetime.datetime.utcnow()
